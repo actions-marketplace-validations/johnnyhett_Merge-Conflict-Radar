@@ -1,0 +1,20 @@
+name: Self-test
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Merge Conflict Radar on itself
+        uses: ./
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          ignore-paths: '*.lock,package-lock.json'

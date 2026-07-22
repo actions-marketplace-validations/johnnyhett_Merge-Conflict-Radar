@@ -1,0 +1,25 @@
+name: 'Merge Conflict Radar'
+description: 'Warns when open pull requests touch the same files, so you can coordinate merge order before a conflict happens.'
+author: 'johnnyhett'
+branding:
+  icon: 'radio'
+  color: 'orange'
+inputs:
+  github-token:
+    description: 'Token used to read pull requests and post comments. Defaults to the workflow GITHUB_TOKEN.'
+    required: false
+    default: ${{ github.token }}
+  ignore-paths:
+    description: 'Comma-separated glob patterns to exclude from comparison (e.g. "*.lock,package-lock.json,dist/**").'
+    required: false
+    default: ''
+  min-shared-files:
+    description: 'Minimum number of shared files required before a warning is posted.'
+    required: false
+    default: '1'
+outputs:
+  collisions:
+    description: 'JSON array of open PRs that share changed files with this PR.'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
