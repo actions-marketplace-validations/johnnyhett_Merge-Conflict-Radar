@@ -28,11 +28,14 @@ jobs:
   radar:
     runs-on: ubuntu-latest
     steps:
-      - uses: johnnyhett/merge-conflict-radar@v1
+      - uses: johnnyhett/merge-conflict-radar@v1.0.0
         with:
           ignore-paths: '*.lock,package-lock.json,dist/**'
           min-shared-files: '1'
 ```
+
+> Tip: once you publish the release, you can also create a moving `v1` tag so
+> consumers can pin to `@v1` and pick up patch updates automatically.
 
 ## Inputs
 
